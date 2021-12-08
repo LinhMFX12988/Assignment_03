@@ -10,24 +10,32 @@ class Nhanvien extends Component {
 
     this.state = {
       staffs: STAFFS,
-      filter: ""
+      // filter: ""
     };
     
     this.handelSearch = this.handelSearch.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.input = React.createRef();
+    // this.onChange = this.onChange.bind(this);
   }
 
-  handelSearch() {
+  handelSearch(event) {
     this.setState({
-      staffs: this.props.staffs.filter((searchName) => searchName.name.toLowerCase().includes(this.state.filter))
-    })
+      staffs: this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.input.current.value.toLowerCase()))
+    });
+    event.preventDefault();
   }
 
-  onChange(val) {
-    this.setState({
-      filter: val.target.value
-    })
-  }
+  // handelSearch() {
+  //   this.setState({
+  //     staffs: this.props.staffs.filter((staff) => staff.name.toLowerCase().includes(this.state.filter))
+  //   })
+  // }
+
+  // onChange(val) {
+  //   this.setState({
+  //     filter: val.target.value
+  //   })
+  // }
 
   render() {
 
@@ -55,16 +63,19 @@ class Nhanvien extends Component {
             <nav className="navbar navbar-light bg-light">
               <div className="container-fluid">
                 <div></div>
-                <form className="d-flex col-8 col-md-6 col-lg-4">
+                <form className="d-flex col-8 col-md-6 col-lg-4" onSubmit={this.handelSearch}>
                   <input className="form-control me-2" 
                          type="search" 
-                         placeholder="Search..." 
-                         onChange={this.onChange} 
+                         placeholder="Search..."
+                         ref={this.input} 
+                        //  onChange={this.onChange}
                         />
 
                   <button className="btn btn-outline-dark" 
-                          type="button" 
-                          onClick={this.handelSearch}>
+                          type="submit"
+                          value="Submit"
+                          // onClick={this.handelSearch}
+                          >
                             GO!
                     </button>
                 </form>
