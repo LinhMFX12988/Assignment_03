@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardTitle } from "reactstrap";
+import { Card, CardImg, CardTitle, Button, Modal, ModalBody, ModalHeader, Label, Row, Col } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { STAFFS } from "../shared/staffs";
+import { Control, LocalForm, Errors } from "react-redux-form";
 
 class Nhanvien extends Component {
 
@@ -10,32 +11,19 @@ class Nhanvien extends Component {
 
     this.state = {
       staffs: STAFFS,
-      // filter: ""
     };
-    
+
     this.handelSearch = this.handelSearch.bind(this);
     this.input = React.createRef();
-    // this.onChange = this.onChange.bind(this);
   }
-
+  
+  //--------------Uncontrolled Form----------------
   handelSearch(event) {
     this.setState({
       staffs: this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.input.current.value.toLowerCase()))
     });
     event.preventDefault();
   }
-
-  // handelSearch() {
-  //   this.setState({
-  //     staffs: this.props.staffs.filter((staff) => staff.name.toLowerCase().includes(this.state.filter))
-  //   })
-  // }
-
-  // onChange(val) {
-  //   this.setState({
-  //     filter: val.target.value
-  //   })
-  // }
 
   render() {
 
@@ -47,7 +35,6 @@ class Nhanvien extends Component {
         </Link>
       </Card>
 
-    // KHi truyền giá trị từ component Cha sang component con phải call là this.props
     const nvien = this.state.staffs.map((staff) =>
       <div key={staff.id} className="col-6 col-md-4 col-lg-2">
         <RenderNVItem staff={staff} />
@@ -62,22 +49,25 @@ class Nhanvien extends Component {
           <div className="col">
             <nav className="navbar navbar-light bg-light">
               <div className="container-fluid">
-                <div></div>
-                <form className="d-flex col-8 col-md-6 col-lg-4" onSubmit={this.handelSearch}>
-                  <input className="form-control me-2" 
-                         type="search" 
-                         placeholder="Search..."
-                         ref={this.input} 
-                        //  onChange={this.onChange}
-                        />
 
-                  <button className="btn btn-outline-dark" 
-                          type="submit"
-                          value="Submit"
-                          // onClick={this.handelSearch}
-                          >
-                            GO!
-                    </button>
+                {/*************************Button Add***************************/}
+                <div>
+                  <Button outline >
+                    <span className="fa fa-plus fa-lg"></span> Add
+                  </Button>
+                </div>
+                <form className="d-flex col-8 col-md-6 col-lg-4" onSubmit={this.handelSearch}>
+                  <input className="form-control me-2"
+                    type="search"
+                    placeholder="Search..."
+                    ref={this.input}
+                  />
+                  <button className="btn btn-outline-dark"
+                    type="submit"
+                    value="Submit"
+                  >
+                    GO!
+                  </button>
                 </form>
               </div>
             </nav>

@@ -1,61 +1,49 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { DEPARTMENTS } from "../shared/staffs";
 
-class PhongBan extends Component {
+//---------Presentational Component------------
+const RenderPhongBan = ({ department }) =>
+    <Card>
+        <div style={{
+            backgroundColor: "#e6dff5",
+            border: "1px solid rgb(112, 112, 112)"
+        }}>
+            <h2>{department.name}</h2>
+            <br />
+            <div className="container text-center">Số lượng nhân viên: {department.numberOfStaff}</div>
+            <br />
+        </div>
+    </Card>
 
-    constructor(props) {
-        super(props);
+//-----------Container Component--------------
+function PhongBan(props) {
 
-        this.state = {
-            departments: DEPARTMENTS
-        };
-    }
+    const pban = props.departments.map((department) =>
+        <div key={department.id} className="col-12 col-md-6 col-lg-4">
+            <RenderPhongBan department={department} />
+        </div>
+    );
 
-    render() {
-
-        const RenderPhongBan = (department) =>
-            <Card>
-                <div style={{
-                    backgroundColor: "#e6dff5",
-                    border: "1px solid rgb(112, 112, 112)"
-                }}>
-                    <h2>{department.department.name}</h2>
-                    <br />
-                    <div className="container text-center">Số lượng nhân viên: {department.department.numberOfStaff}</div>
-                    <br />
-                </div>
-            </Card>
-
-        const phongban = this.state.departments.map((department) =>
-            <div key={department.id} className="col-12 col-md-6 col-lg-4">
-                <RenderPhongBan department={department} />
+    return (
+        <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to="/nhanvien">Nhân Viên</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
+                </Breadcrumb>
             </div>
-        );
-
-        return (
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/nhanvien">Nhân Viên</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
-                    </Breadcrumb>
-                </div>
-                <div className="col-12">                  
-                    <h1 className="text-center">Phòng Ban</h1>
-                    <hr />
-                    <div className="row">{phongban}</div>
-                    <hr />
-                </div>
+            <div className="col-12">
+                <h1 className="text-center">Phòng Ban</h1>
+                <hr />
+                <div className="row">{pban}</div>
+                <hr />
             </div>
-        )
-    }
+        </div>
+    );
 
 }
 
 export default PhongBan;
-
-
