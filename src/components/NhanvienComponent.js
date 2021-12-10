@@ -11,10 +11,13 @@ class Nhanvien extends Component {
 
     this.state = {
       staffs: STAFFS,
+      isAddFormModalOpen: false
     };
-
     this.handelSearch = this.handelSearch.bind(this);
     this.input = React.createRef();
+
+    this.toggleAddFormModal = this.toggleAddFormModal.bind(this);
+    this.handelAddFormSubmit = this.handelAddFormSubmit.bind(this);
   }
   
   //--------------Uncontrolled Form----------------
@@ -23,6 +26,18 @@ class Nhanvien extends Component {
       staffs: this.props.staffs.filter(staff => staff.name.toLowerCase().includes(this.input.current.value.toLowerCase()))
     });
     event.preventDefault();
+  }
+
+  //--------------Add Staffs-----------------
+  handelAddFormSubmit(values) {
+    console.log("Current State is: " + JSON.stringify(values));
+    alert("Current State is: " + JSON.stringify(values));
+  }
+
+  toggleAddFormModal() {
+    this.setState({
+      isAddFormModalOpen: !this.state.isAddFormModalOpen
+    });
   }
 
   render() {
@@ -52,10 +67,40 @@ class Nhanvien extends Component {
 
                 {/*************************Button Add***************************/}
                 <div>
-                  <Button outline >
+                  <Button outline onClick={this.toggleAddFormModal}>
                     <span className="fa fa-plus fa-lg"></span> Add
                   </Button>
                 </div>
+                {/*Add Form Modal*/}
+                <Modal isOpen={this.state.isAddFormModalOpen}
+                       toggle={this.toggleAddFormModal}
+                >
+                  <ModalHeader toggle={this.toggleAddFormModal}>
+                    {" "}Thêm Nhân Viên{" "}
+                  </ModalHeader>
+                  <ModalBody>
+                    <LocalForm
+                        onSubmit={(values) => this.handelAddFormSubmit(values)}
+                    >
+                    <Row className="form-group">
+                      <Label htmlFor="outhor" md={12}>
+                        {" "}Tên{" "}                       
+                      </Label>
+                    </Row>
+
+                    {/*Add button*/}
+                    <Row className="form-group">
+                      <Col>
+                        <Button type="submit" color="primary">
+                          {" "}Thêm{" "}
+                        </Button>
+                      </Col>
+                    </Row>
+                    
+                    </LocalForm>
+                  </ModalBody>
+                </Modal>
+              {/*************************End Button Add***************************/}
                 <form className="d-flex col-8 col-md-6 col-lg-4" onSubmit={this.handelSearch}>
                   <input className="form-control me-2"
                     type="search"
