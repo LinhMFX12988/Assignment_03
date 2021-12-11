@@ -34,6 +34,12 @@ class Nhanvien extends Component {
     this.toggleAddFormModal = this.toggleAddFormModal.bind(this);
     this.handelAddFormSubmit = this.handelAddFormSubmit.bind(this);
   }
+//-------------setState--------------------
+  // updateState() {
+  //   this.setState({
+  //     staffs: this.state.staffs.push(values)
+  //   });
+  // }
 
   //--------------Uncontrolled Form----------------
   handelSearch(event) {
@@ -50,7 +56,19 @@ class Nhanvien extends Component {
   //--------------Add Staffs-----------------
   handelAddFormSubmit(values) {
     console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+
+    console.log("values:", values)
+    let staffs1 = this.state.staffs;
+    let newStaffs = staffs1.concat([{
+      id: this.state.staffs.length + 1,
+      name: values.name,
+      image: '/assets/images/alberto.png'
+    }]);
+   
+    this.setState({
+      staffs: newStaffs
+    });
+
   }
 
   toggleAddFormModal() {
