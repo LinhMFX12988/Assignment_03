@@ -17,7 +17,6 @@ import { Control, LocalForm, Errors } from "react-redux-form";
 
 ///// Validators
 const required = (val) => val && val.length;
-const length = (val) => val && val.length === "";
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && val.length >= len;
 
@@ -117,7 +116,6 @@ class Nhanvien extends Component {
                             className="form-control"
                             validators={{
                               required,
-                              length: length(""),
                               maxLength: maxLength(30),
                               minLength: minLength(2),
                             }}
@@ -128,7 +126,6 @@ class Nhanvien extends Component {
                             show="touched"
                             messages={{
                               require: "Required",
-                              length: "Yêu cầu nhập",
                               maxLength: "Yêu cầu ít hơn 30 kí tự",
                               minLength: "Yêu cầu nhiều hơn 2 kí tự",
                             }}
@@ -173,7 +170,6 @@ class Nhanvien extends Component {
                             model=".startDate"
                             id="startDate"
                             name="startDate"
-                            placeholder="dd/mm/yyyy"
                             className="form-control"
                             type="date"
                             validators={{
@@ -234,7 +230,8 @@ class Nhanvien extends Component {
                             id="salaryScale"
                             name="salaryScale"
                             className="form-control"
-                            type="number"
+                            type="number.toFixed()"
+                            placeholder="1.0 -> 3.0"
                             validators={{
                               required,
                             }}
@@ -252,7 +249,8 @@ class Nhanvien extends Component {
                             id="numberOfStaff"
                             name="numberOfStaff"
                             className="form-control"
-                            type="number"
+                            type="number.toFixed()"
+                            placeholder="0"
                             validators={{
                               required,
                             }}
@@ -270,7 +268,8 @@ class Nhanvien extends Component {
                             id="annualLeave"
                             name="annualLeave"
                             className="form-control"
-                            type="number"
+                            type="number.toFixed()"
+                            placeholder="0"
                             validators={{
                               required,
                             }}
