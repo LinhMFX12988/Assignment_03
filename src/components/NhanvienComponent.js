@@ -25,7 +25,6 @@ class Nhanvien extends Component {
     super(props);
 
     this.state = {
-      staffs: STAFFS,
       isAddFormModalOpen: false,
     };
     this.handelSearch = this.handelSearch.bind(this);
@@ -49,20 +48,7 @@ class Nhanvien extends Component {
 
   //--------------Add Staffs-----------------
   handelAddFormSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-
-  //------------setState --------------- 
-    let staffs1 = this.state.staffs;
-    let newStaffs = staffs1.concat([{
-      id: this.state.staffs.length + 1,
-      name: values.name,
-      image: '/assets/images/alberto.png'
-    }]);
-  
-    this.setState({
-      staffs: newStaffs
-    });
-
+    this.props.addStaff(values)
   }
 
   toggleAddFormModal() {
@@ -84,7 +70,7 @@ class Nhanvien extends Component {
       </Card>
     );
 
-    const nvien = this.state.staffs.map((staff) => (
+    const nvien = this.props.staffs.map((staff) => (
       <div key={staff.id} className="col-6 col-md-4 col-lg-2">
         <RenderNVItem staff={staff} />
       </div>
@@ -109,7 +95,7 @@ class Nhanvien extends Component {
                   isOpen={this.state.isAddFormModalOpen}
                   toggle={this.toggleAddFormModal}
                 >
-                  <ModalHeader toggle={this.toggleAddFormModal}>                    
+                  <ModalHeader toggle={this.toggleAddFormModal}>
                     Thêm Nhân Viên
                   </ModalHeader>
                   <ModalBody>
@@ -117,7 +103,7 @@ class Nhanvien extends Component {
                       onSubmit={(values) => this.handelAddFormSubmit(values)}
                     >
                       <Row className="form-group">
-                        <Label htmlFor="name" md={5}>                         
+                        <Label htmlFor="name" md={5}>
                           Tên
                         </Label>
                         <Col md={7}>
@@ -207,7 +193,7 @@ class Nhanvien extends Component {
                         </Label>
                         <Col md={7}>
                           <Control.select
-                            model=".sale"
+                            model=".department"
                             className="form-control"
                             name="sale"
                             id="sale"
@@ -215,15 +201,15 @@ class Nhanvien extends Component {
                               required,
                             }}
                           >
-                            <option>Sale</option>
-                            <option>HR</option>
-                            <option>Marketing</option>
-                            <option>IT</option>
-                            <option>Finance</option>
+                            <option value="Dept01">Sale</option>
+                            <option value="Dept02">HR</option>
+                            <option value="Dept03">Marketing</option>
+                            <option value="Dept04">IT</option>
+                            <option value="Dept05">Finance</option>
                           </Control.select>
                           <Errors
                             className="text-danger"
-                            model=".author"
+                            model=".department"
                             show="touched"
                             messages={{
                               required: "Required",
@@ -248,23 +234,12 @@ class Nhanvien extends Component {
                               required,
                             }}
                           />
-                        </Col>
-                      </Row>
-
-                      <Row className="form-group">
-                        <Label htmlFor="numberOfStaff" md={5}>
-                          Số ngày nghỉ còn lại
-                        </Label>
-                        <Col md={7}>
-                          <Control.text
-                            model=".numberOfStaff"
-                            id="numberOfStaff"
-                            name="numberOfStaff"
-                            className="form-control"
-                            type="number.toFixed()"
-                            placeholder="0"
-                            validators={{
-                              required,
+                          <Errors
+                            className="text-danger"
+                            model=".salaryScale"
+                            show="touched"
+                            messages={{
+                              required: "Required",
                             }}
                           />
                         </Col>
@@ -272,7 +247,7 @@ class Nhanvien extends Component {
 
                       <Row className="form-group">
                         <Label htmlFor="annualLeave" md={5}>
-                          Số ngày đã làm thêm
+                          Số ngày nghỉ còn lại
                         </Label>
                         <Col md={7}>
                           <Control.text
@@ -284,6 +259,41 @@ class Nhanvien extends Component {
                             placeholder="0"
                             validators={{
                               required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".annualLeave"
+                            show="touched"
+                            messages={{
+                              required: "Required",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="overTime" md={5}>
+                          Số ngày đã làm thêm
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".overTime"
+                            id="overTime"
+                            name="overTime"
+                            className="form-control"
+                            type="number.toFixed()"
+                            placeholder="0"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".overTime"
+                            show="touched"
+                            messages={{
+                              required: "Required",
                             }}
                           />
                         </Col>
