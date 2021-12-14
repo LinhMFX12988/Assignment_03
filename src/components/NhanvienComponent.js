@@ -36,13 +36,14 @@ class Nhanvien extends Component {
 
   //--------------Uncontrolled Form----------------
   handelSearch(event) {
-    this.setState({
-      staffs: this.props.staffs.filter((staff) =>
-        staff.name
-          .toLowerCase()
-          .includes(this.input.current.value.toLowerCase())
-      ),
-    });
+    this.props.mySearch()
+    // this.setState({
+    //   staffs: this.props.staffs.filter((staff) =>
+    //     staff.name
+    //       .toLowerCase()
+    //       .includes(this.input.current.value.toLowerCase())
+    //   ),
+    // });
     event.preventDefault();
   }
 
@@ -123,9 +124,9 @@ class Nhanvien extends Component {
                             model=".name"
                             show="touched"
                             messages={{
-                              require: "Required",
-                              maxLength: "Yêu cầu ít hơn 30 kí tự",
+                              require: "Yêu cầu nhập",
                               minLength: "Yêu cầu nhiều hơn 2 kí tự",
+                              maxLength: "Yêu cầu ít hơn 30 kí tự",                             
                             }}
                           />
                         </Col>
@@ -211,9 +212,6 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".department"
                             show="touched"
-                            messages={{
-                              required: "Required",
-                            }}
                           />
                         </Col>
                       </Row>
@@ -238,9 +236,6 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".salaryScale"
                             show="touched"
-                            messages={{
-                              required: "Required",
-                            }}
                           />
                         </Col>
                       </Row>
@@ -265,9 +260,6 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".annualLeave"
                             show="touched"
-                            messages={{
-                              required: "Required",
-                            }}
                           />
                         </Col>
                       </Row>
@@ -292,9 +284,6 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".overTime"
                             show="touched"
-                            messages={{
-                              required: "Required",
-                            }}
                           />
                         </Col>
                       </Row>
