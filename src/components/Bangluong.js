@@ -80,6 +80,7 @@ class Bangluong extends Component {
             );
         }
 
+
         const nvien = this.state.staffs.map((staff) =>
 
             <div key={staff.id} className="col-12 col-md-6 col-lg-4">
@@ -102,14 +103,14 @@ class Bangluong extends Component {
                     <button style={{ margin: 5, float: "right" }} 
                             type="button"
                             onClick={this.onSortChangeMoney}                             
-                            className="btn btn-outline-dark btn-sm col-4 col-md-2 col-lg-1">
+                            className="btn btn-outline-dark btn-sm">
                                 Lương 
                         <i onClick={this.onSortChangeId} className="fa fa-sort"></i>
                     </button>
                     <button style={{ margin: 5, float: "right" }} 
                             type="button"
                             onClick={this.onSortChangeId}
-                            className="btn btn-outline-dark btn-sm col-4 col-md-2 col-lg-1">
+                            className="btn btn-outline-dark btn-sm">
                         Mã NV 
                         <i onClick={this.onSortChangeId} className="fa fa-sort"></i>
                     </button>

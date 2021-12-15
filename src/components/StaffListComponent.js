@@ -25,7 +25,9 @@ function RenderStaff({ staffs }) {
 }
 
 const StaffDetail = (props) => {
-  
+
+  if (props.staffs != null) {
+    
     return (
       <div className="container">
         <hr />
@@ -42,6 +44,7 @@ const StaffDetail = (props) => {
         <hr />
       </div>
     );
-  
+  }
+
 }
 export default StaffDetail;
