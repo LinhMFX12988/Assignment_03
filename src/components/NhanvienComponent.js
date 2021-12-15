@@ -1,22 +1,26 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardTitle } from "reactstrap";
+import { Card, CardImg, CardTitle, Button, Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { STAFFS } from "../shared/staffs";
+import { LocalForm } from "react-redux-form";
 
 class Nhanvien extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       staffs: STAFFS,
+      isAddFormModalOpen: false,
     } 
+
     this.input = React.createRef();
     this.handelSearch = this.handelSearch.bind(this);
+    this.toggleAddFormModal = this.toggleAddFormModal(this);
   }
 
   //--------------Uncontrolled Form----------------
   handelSearch(event) {
-    console.log(this.props.staffs)
     this.setState({
       staffs: this.props.staffs.filter((staff) =>
         staff.name
@@ -25,6 +29,12 @@ class Nhanvien extends Component {
       ),
     });
     event.preventDefault();
+  }
+
+  toggleAddFormModal() {
+    this.setState({
+      isAddFormModalOpen: !this.state.isAddFormModalOpen,
+    });
   }
 
   render() {
@@ -51,7 +61,33 @@ class Nhanvien extends Component {
           <div className="col">
             <nav className="navbar navbar-light bg-light">
               <div className="container-fluid">
-                <div></div>
+                
+                <Button outline onClick={this.toggleAddFormModal}>
+                  <span className="fa fa-plus fa-lg"></span> Add
+                </Button>   
+
+                <Modal
+                  isOpen={this.state.isAddFormModalOpen}
+                  toggle={this.toggleAddFormModal}
+                >
+                  <ModalHeader toggle={this.toggleAddFormModal}>
+                    Thêm Nhân Viên
+                  </ModalHeader>
+                  <ModalBody>
+                    <LocalForm>
+
+                      {/*Add button*/}
+                      <Row className="form-group">
+                        <Col>
+                          <Button type="submit" color="primary">
+                            Thêm
+                          </Button>
+                        </Col>
+                      </Row>                   
+                    </LocalForm>
+                  </ModalBody>
+                </Modal>
+
                 <form
                   className="d-flex col-8 col-md-6 col-lg-4"
                   onSubmit={this.handelSearch}
