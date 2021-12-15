@@ -9,16 +9,16 @@ import {
   ModalHeader,
   Label,
   Row,
+  Input,
   Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { STAFFS } from "../shared/staffs";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 ///// Validators
-const required = (val) => val && val.length;
+const required = (val) =>{return val && val.length};
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => val && val.length >= len;
+const minLength = (len) => (val) => !(val) || (val.length >= len);
 
 class Nhanvien extends Component {
   constructor(props) {
@@ -26,25 +26,12 @@ class Nhanvien extends Component {
 
     this.state = {
       isAddFormModalOpen: false,
+      search: '',
     };
-    this.handelSearch = this.handelSearch.bind(this);
     this.input = React.createRef();
-
     this.toggleAddFormModal = this.toggleAddFormModal.bind(this);
     this.handelAddFormSubmit = this.handelAddFormSubmit.bind(this);
-  }
-
-  //--------------Uncontrolled Form----------------
-  handelSearch(event) {
-    this.props.mySearch()
-    // this.setState({
-    //   staffs: this.props.staffs.filter((staff) =>
-    //     staff.name
-    //       .toLowerCase()
-    //       .includes(this.input.current.value.toLowerCase())
-    //   ),
-    // });
-    event.preventDefault();
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   //--------------Add Staffs-----------------
@@ -58,6 +45,11 @@ class Nhanvien extends Component {
     });
   }
 
+  //---------------Search--------------------
+  handleSearch(e) {
+    this.setState({ search: e.target.value });
+  };
+
   render() {
     const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
@@ -70,8 +62,13 @@ class Nhanvien extends Component {
         </Link>
       </Card>
     );
+  //---------------Search---------------------
+    const { search } = this.state;
+    const filterStaff = this.props.staffs.filter(staffItem => {
+      return staffItem.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
 
-    const nvien = this.props.staffs.map((staff) => (
+    const nvien = filterStaff.map((staff) => (
       <div key={staff.id} className="col-6 col-md-4 col-lg-2">
         <RenderNVItem staff={staff} />
       </div>
@@ -124,9 +121,9 @@ class Nhanvien extends Component {
                             model=".name"
                             show="touched"
                             messages={{
-                              require: "Yêu cầu nhập",
+                              required: "Yêu cầu nhập",
                               minLength: "Yêu cầu nhiều hơn 2 kí tự",
-                              maxLength: "Yêu cầu ít hơn 30 kí tự",                             
+                              maxLength: "Yêu cầu ít hơn 30 kí tự",
                             }}
                           />
                         </Col>
@@ -145,7 +142,6 @@ class Nhanvien extends Component {
                             type="date"
                             validators={{
                               required,
-                              minLength: minLength(1),
                             }}
                           />
                           <Errors
@@ -153,8 +149,7 @@ class Nhanvien extends Component {
                             model=".doB"
                             show="touched"
                             messages={{
-                              require: "Required",
-                              minLength: "Yêu cầu nhập",
+                              required: "Yêu cầu nhập",
                             }}
                           />
                         </Col>
@@ -173,7 +168,6 @@ class Nhanvien extends Component {
                             type="date"
                             validators={{
                               required,
-                              minLength: minLength(1),
                             }}
                           />
                           <Errors
@@ -181,8 +175,7 @@ class Nhanvien extends Component {
                             model=".startDate"
                             show="touched"
                             messages={{
-                              require: "Required",
-                              minLength: "Yêu cầu nhập",
+                              required: "Yêu cầu nhập",
                             }}
                           />
                         </Col>
@@ -197,7 +190,7 @@ class Nhanvien extends Component {
                             model=".department"
                             className="form-control"
                             name="sale"
-                            id="sale"
+                            id="sale"                          
                             validators={{
                               required,
                             }}
@@ -236,6 +229,9 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".salaryScale"
                             show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
                           />
                         </Col>
                       </Row>
@@ -260,6 +256,9 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".annualLeave"
                             show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
                           />
                         </Col>
                       </Row>
@@ -284,6 +283,9 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".overTime"
                             show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
                           />
                         </Col>
                       </Row>
@@ -303,21 +305,13 @@ class Nhanvien extends Component {
 
                 <form
                   className="d-flex col-8 col-md-6 col-lg-4"
-                  onSubmit={this.handelSearch}
                 >
-                  <input
-                    className="form-control me-2"
-                    type="search"
+                  <Input
                     placeholder="Search..."
-                    ref={this.input}
+                    label="Search"
+                    icon="search"
+                    onChange={this.handleSearch}
                   />
-                  <button
-                    className="btn btn-outline-dark"
-                    type="submit"
-                    value="Submit"
-                  >
-                    GO!
-                  </button>
                 </form>
               </div>
             </nav>

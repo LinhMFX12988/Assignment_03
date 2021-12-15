@@ -24,19 +24,9 @@ class Main extends Component {
     this.state = {
       staffs: props.staffs
     }
-    this.addStaff = this.addStaff.bind(this)
+    this.addStaff = this.addStaff.bind(this);
   }
-//-----Search---------
-  mySearch() {
-    this.setState({
-      staffs: this.state.staffs.filter((staff) =>
-        staff.name
-          .toLowerCase()
-          .includes(this.input.current.value.toLowerCase())
-      ),
-   })
-  }
-  
+
 //-----Add Staffs-----
   addStaff(newStaff) {
     let staffs1 = this.state.staffs;
@@ -65,9 +55,8 @@ class Main extends Component {
         <Header />
         <Switch>
           <Route exact path="/nhanvien" component={() => <Nhanvien 
-            staffs={this.state.staffs} 
+            staffs={this.state.staffs}
             addStaff={this.addStaff}
-            mySearch={this.mySearch}
             />} />
           <Route path="/nhanvien/:id" component={StaffWithId} />
           <Route path="/phongban" component={() => <PhongBan departments={this.props.departments} />} />
