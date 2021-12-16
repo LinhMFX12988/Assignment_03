@@ -15,12 +15,12 @@ class Nhanvien extends Component {
     } 
 
     this.input = React.createRef();
-    this.handelSearch = this.handelSearch.bind(this);
-    this.toggleAddFormModal = this.toggleAddFormModal(this);
+    // this.handelSearch = this.handelSearch.bind(this);
+    // this.toggleAddFormModal = this.toggleAddFormModal.bind(this);
   }
 
   //--------------Uncontrolled Form----------------
-  handelSearch(event) {
+  handelSearch = (event) => {
     this.setState({
       staffs: this.props.staffs.filter((staff) =>
         staff.name
@@ -31,7 +31,7 @@ class Nhanvien extends Component {
     event.preventDefault();
   }
 
-  toggleAddFormModal() {
+  toggleAddFormModal = () => {
     this.setState({
       isAddFormModalOpen: !this.state.isAddFormModalOpen,
     });
