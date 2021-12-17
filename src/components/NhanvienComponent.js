@@ -16,12 +16,25 @@ import { STAFFS } from "../shared/staffs";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 ///// Validators
-const required = (val) => {
-  return val && val.length;
-};
+const required = (val) => {return val && val.length;};
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => !val || val.length >= len;
 
+const newStaff = {
+
+  id: "",
+  name: "",
+  doB: "",
+  salaryScale: "",
+  startDate: "",
+  department: "",
+  annualLeave: "",
+  overTime: "",
+  salary: "",
+  image: '/assets/images/alberto.png',
+  
+  }
+  
 class Nhanvien extends Component {
   constructor(props) {
     super(props);
