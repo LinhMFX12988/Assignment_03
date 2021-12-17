@@ -189,6 +189,7 @@ class Nhanvien extends Component {
                           <Control.select
                             model=".department"
                             className="form-control"
+                            defaultValue="Sale"
                             name="sale"
                             id="sale"                          
                             validators={{
@@ -220,7 +221,8 @@ class Nhanvien extends Component {
                             name="salaryScale"
                             className="form-control"
                             type="number.toFixed()"
-                            placeholder="1.0 -> 3.0"
+                            placeHolder="1-3"
+                            defaultValue="1"
                             validators={{
                               required,
                             }}
@@ -248,6 +250,7 @@ class Nhanvien extends Component {
                             className="form-control"
                             type="number.toFixed()"
                             placeholder="0"
+                            defaultValue="0"
                             validators={{
                               required,
                             }}
@@ -275,6 +278,7 @@ class Nhanvien extends Component {
                             className="form-control"
                             type="number.toFixed()"
                             placeholder="0"
+                            defaultValue="0"
                             validators={{
                               required,
                             }}
