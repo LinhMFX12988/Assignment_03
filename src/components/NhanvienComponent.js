@@ -1,18 +1,35 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardTitle, Button, Modal, ModalHeader, ModalBody, Row, Col } from "reactstrap";
-import { Link } from 'react-router-dom';
+import {
+  Card,
+  CardImg,
+  CardTitle,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Row,
+  Col,
+  Label,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 import { STAFFS } from "../shared/staffs";
-import { LocalForm } from "react-redux-form";
+import { Control, LocalForm, Errors } from "react-redux-form";
+
+///// Validators
+const required = (val) => {
+  return val && val.length;
+};
+const maxLength = (len) => (val) => !val || val.length <= len;
+const minLength = (len) => (val) => !val || val.length >= len;
 
 class Nhanvien extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       staffs: STAFFS,
       isAddFormModalOpen: false,
-    } 
+    };
 
     this.input = React.createRef();
     // this.handelSearch = this.handelSearch.bind(this);
@@ -29,29 +46,32 @@ class Nhanvien extends Component {
       ),
     });
     event.preventDefault();
-  }
+  };
 
   toggleAddFormModal = () => {
     this.setState({
       isAddFormModalOpen: !this.state.isAddFormModalOpen,
     });
-  }
+  };
 
   render() {
-
-    const RenderNVItem = ({ staff }) =>
+    const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
-        <Link to={`/nhanvien/${staff.id}`} >
+        <Link to={`/nhanvien/${staff.id}`}>
           <CardImg width="100%" src={staff.image} />
-          <CardTitle className="text-center" style={{ color: "black" }}> {staff.name}</CardTitle>
+          <CardTitle className="text-center" style={{ color: "black" }}>
+            {" "}
+            {staff.name}
+          </CardTitle>
         </Link>
       </Card>
+    );
 
-    const nvien = this.state.staffs.map((staff) =>
+    const nvien = this.state.staffs.map((staff) => (
       <div key={staff.id} className="col-6 col-md-4 col-lg-2">
         <RenderNVItem staff={staff} />
       </div>
-    );
+    ));
 
     return (
       <div className="container">
@@ -61,10 +81,9 @@ class Nhanvien extends Component {
           <div className="col">
             <nav className="navbar navbar-light bg-light">
               <div className="container-fluid">
-                
                 <Button outline onClick={this.toggleAddFormModal}>
                   <span className="fa fa-plus fa-lg"></span> Add
-                </Button>   
+                </Button>
 
                 <Modal
                   isOpen={this.state.isAddFormModalOpen}
@@ -75,6 +94,195 @@ class Nhanvien extends Component {
                   </ModalHeader>
                   <ModalBody>
                     <LocalForm>
+                      <Row className="form-group">
+                        <Label htmlFor="name" md={5}>
+                          Tên
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".name"
+                            id="name"
+                            name="name"
+                            className="form-control"
+                            validators={{
+                              required,
+                              maxLength: maxLength(30),
+                              minLength: minLength(2),
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".name"
+                            show="touched"
+                            messages={{
+                              required: "Yêu cầu nhập",
+                              minLength: "Yêu cầu nhiều hơn 2 kí tự",
+                              maxLength: "Yêu cầu ít hơn 30 kí tự",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="doB" md={5}>
+                          Ngày sinh
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".doB"
+                            id="doB"
+                            name="doB"
+                            className="form-control"
+                            type="date"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".doB"
+                            show="touched"
+                            messages={{
+                              required: "Yêu cầu nhập",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="startDate" md={5}>
+                          Ngày vào công ty
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".startDate"
+                            id="startDate"
+                            name="startDate"
+                            className="form-control"
+                            type="date"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".startDate"
+                            show="touched"
+                            messages={{
+                              required: "Yêu cầu nhập",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="sale" md={5}>
+                          Phòng ban
+                        </Label>
+                        <Col md={7}>
+                          <Control.select
+                            model=".department"
+                            className="form-control"
+                            name="sale"
+                            id="sale"
+                            validators={{
+                              required,
+                            }}
+                          >
+                            <option value="Dept01">Sale</option>
+                            <option value="Dept02">HR</option>
+                            <option value="Dept03">Marketing</option>
+                            <option value="Dept04">IT</option>
+                            <option value="Dept05">Finance</option>
+                          </Control.select>
+                          <Errors
+                            className="text-danger"
+                            model=".department"
+                            show="touched"
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="salaryScale" md={5}>
+                          Hệ số lương
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".salaryScale"
+                            id="salaryScale"
+                            name="salaryScale"
+                            className="form-control"
+                            type="number.toFixed()"
+                            placeholder="1.0 -> 3.0"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".salaryScale"
+                            show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="annualLeave" md={5}>
+                          Số ngày nghỉ còn lại
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".annualLeave"
+                            id="annualLeave"
+                            name="annualLeave"
+                            className="form-control"
+                            type="number.toFixed()"
+                            placeholder="0"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".annualLeave"
+                            show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="form-group">
+                        <Label htmlFor="overTime" md={5}>
+                          Số ngày đã làm thêm
+                        </Label>
+                        <Col md={7}>
+                          <Control.text
+                            model=".overTime"
+                            id="overTime"
+                            name="overTime"
+                            className="form-control"
+                            type="number.toFixed()"
+                            placeholder="0"
+                            validators={{
+                              required,
+                            }}
+                          />
+                          <Errors
+                            className="text-danger"
+                            model=".overTime"
+                            show="touched"
+                            messages={{
+                              require: "Required",
+                            }}
+                          />
+                        </Col>
+                      </Row>
 
                       {/*Add button*/}
                       <Row className="form-group">
@@ -83,7 +291,7 @@ class Nhanvien extends Component {
                             Thêm
                           </Button>
                         </Col>
-                      </Row>                   
+                      </Row>
                     </LocalForm>
                   </ModalBody>
                 </Modal>
