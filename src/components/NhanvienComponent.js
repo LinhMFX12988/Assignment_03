@@ -59,7 +59,7 @@ class Nhanvien extends Component {
     let value = e.target.value;
     this.setState({
       [staffKey]: value
-    })  
+    })
   }
 
   toggleAddFormModal = () => {
@@ -68,10 +68,10 @@ class Nhanvien extends Component {
     });
   };
 
-  handelAddFormSubmit(values) {
-  
+  handelAddFormSubmit(event) {
+    
     let staff = {
-      id: this.state.id,
+      id: this.state.staffs.length + 1,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
@@ -80,10 +80,14 @@ class Nhanvien extends Component {
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       salary: this.state.salary,
-      image: '/assets/images/alberto.png',
-    }    
-    console.log(staff);
-    values.preventDefault();
+      image: '/assets/images/alberto.png'
+    }   
+    // console.log(staff); 
+    this.setState({staffs: [...this.state.staffs,staff]})
+    console.log(staff.department)
+    // var department = this.props.departments.filter(x => x.id === staff.department)
+    // console.log(department);
+    event.preventDefault();
     
   }
 

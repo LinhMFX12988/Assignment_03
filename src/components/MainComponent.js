@@ -29,7 +29,7 @@ class Main extends Component {
 
     return (
       <div>
-        <Header />       
+        <Header />
         <Switch>
           <Route exact path="/nhanvien" component={() => <Nhanvien staffs={this.state.staffs} />} />
           <Route path="/nhanvien/:id" component={StaffWithId} />
