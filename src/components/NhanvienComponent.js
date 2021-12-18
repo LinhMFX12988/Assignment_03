@@ -26,16 +26,6 @@ class Nhanvien extends Component {
     this.state = {
       staffs: STAFFS,
       isAddFormModalOpen: false,
-      id: "",
-      name: "",
-      doB: "",
-      salaryScale: "",
-      startDate: "",
-      department: "",
-      annualLeave: "",
-      overTime: "",
-      salary: "",
-      image: '/assets/images/alberto.png',
     };
     this.input = React.createRef();
   }
@@ -68,10 +58,10 @@ class Nhanvien extends Component {
     });
   };
 
-  handelAddFormSubmit(event) {
+  handelAddFormSubmit(e) {
     
     let staff = {
-      id: this.state.staffs.length + 1,
+      // id: this.state.staffs.length + 1,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
@@ -81,13 +71,12 @@ class Nhanvien extends Component {
       overTime: this.state.overTime,
       salary: this.state.salary,
       image: '/assets/images/alberto.png'
-    }   
-    // console.log(staff); 
-    this.setState({staffs: [...this.state.staffs,staff]})
-    console.log(staff.department)
-    // var department = this.props.departments.filter(x => x.id === staff.department)
-    // console.log(department);
-    event.preventDefault();
+    }     
+    console.log(staff)
+    this.props.addStaff(staff)
+
+    e.preventDefault();
+   
     
   }
 
@@ -130,7 +119,7 @@ class Nhanvien extends Component {
                     Thêm Nhân Viên
                   </ModalHeader>
                   <ModalBody>
-                    <Form onSubmit={(values) => this.handelAddFormSubmit(values)}>
+                    <Form onSubmit={ this.handelAddFormSubmit }>
                       {/* Full name */}
                       <FormGroup>
                         <Row className="form-group">
@@ -199,11 +188,11 @@ class Nhanvien extends Component {
                               value={this.state.department}
                               onChange={this.hendleChange}
                             >
-                              <option value="Finance">Finance</option>
-                              <option value="HR">HR</option>
-                              <option value="IT">IT</option>
-                              <option value="Marketing">Marketing</option>
-                              <option value="Sale">Sale</option>
+                              <option value="Dept01">Sale</option>
+                              <option value="Dept02">HR</option>
+                              <option value="Dept03">Marketing</option>
+                              <option value="Dept04">IT</option>
+                              <option value="Dept05">Finance</option>
                             </Input>
                           </Col>
                         </Row>
@@ -237,7 +226,6 @@ class Nhanvien extends Component {
                               id="annualLeave"
                               name="annualLeave"
                               className="form-control"
-                              placeHolder="0"
                               value={this.state.annualLeave}
                               onChange={this.hendleChange}
                             />
@@ -255,7 +243,6 @@ class Nhanvien extends Component {
                               id="overTime"
                               name="overTime"
                               className="form-control"
-                              placeHolder="0"
                               value={this.state.overTime}
                               onChange={this.hendleChange}
                             />
@@ -307,3 +294,4 @@ class Nhanvien extends Component {
 }
 
 export default Nhanvien;
+
