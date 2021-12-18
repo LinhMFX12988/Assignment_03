@@ -37,7 +37,6 @@ class Nhanvien extends Component {
       salary: "",
       image: '/assets/images/alberto.png',
     };
-
     this.input = React.createRef();
   }
 
@@ -57,8 +56,10 @@ class Nhanvien extends Component {
 
   hendleChange = (e) => {
     let staffKey = e.target.name;
-    let value = e.target.value;    
-    this.setState({[staffKey]: value})
+    let value = e.target.value;
+    this.setState({
+      [staffKey]: value
+    })  
   }
 
   toggleAddFormModal = () => {
@@ -68,8 +69,9 @@ class Nhanvien extends Component {
   };
 
   handelAddFormSubmit(values) {
-    
-    var staff = {
+  
+    let staff = {
+      id: this.state.id,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
@@ -78,11 +80,10 @@ class Nhanvien extends Component {
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       salary: this.state.salary,
-      image: '/assets/images/alberto.png', 
+      image: '/assets/images/alberto.png',
     }    
-    console.log(staff);   
+    console.log(staff);
     values.preventDefault();
-    
     
   }
 
