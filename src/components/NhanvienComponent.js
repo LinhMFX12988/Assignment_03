@@ -12,10 +12,9 @@ import {
   Col,
   Label,
   FormGroup,
-  Input
+  Input,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { STAFFS } from "../shared/staffs";
 
 ///// Validators
 
@@ -24,7 +23,8 @@ class Nhanvien extends Component {
     super(props);
 
     this.state = {
-      staffs: STAFFS,
+      staffs: this.props.staffs,
+      // em fix như thế nay thêm props bên ngoài thử đc k?
       isAddFormModalOpen: false,
     };
     this.input = React.createRef();
@@ -48,9 +48,9 @@ class Nhanvien extends Component {
     let staffKey = e.target.name;
     let value = e.target.value;
     this.setState({
-      [staffKey]: value
-    })
-  }
+      [staffKey]: value,
+    });
+  };
 
   toggleAddFormModal = () => {
     this.setState({
@@ -58,26 +58,24 @@ class Nhanvien extends Component {
     });
   };
 
-  handelAddFormSubmit(e) {
-    
+  handelAddFormSubmit(event) {
     let staff = {
-      // id: this.state.staffs.length + 1,
+      id: this.state.staffs.length + 1,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
       startDate: this.state.startDate,
-      department: this.state.department,
+      department: this.props.department.filter(x => x.id === staff.department)[0],
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       salary: this.state.salary,
-      image: '/assets/images/alberto.png'
-    }     
-    console.log(staff)
-    this.props.addStaff(staff)
+      image: "/assets/images/alberto.png",
+    };
+    console.log(staff);
+    this.setState({ staffs: [...this.state.staffs, staff] });
+    this.props.addStaff(staff, event)
 
-    e.preventDefault();
-   
-    
+    event.preventDefault();
   }
 
   render() {
@@ -119,7 +117,9 @@ class Nhanvien extends Component {
                     Thêm Nhân Viên
                   </ModalHeader>
                   <ModalBody>
-                    <Form onSubmit={ this.handelAddFormSubmit }>
+                    <Form
+                      onSubmit={(values) => this.handelAddFormSubmit(values)}
+                    >
                       {/* Full name */}
                       <FormGroup>
                         <Row className="form-group">
@@ -253,7 +253,7 @@ class Nhanvien extends Component {
                       <FormGroup>
                         <Row className="form-group">
                           <Col className="col-7 offset-5">
-                            <Button type="submit" color="primary" >
+                            <Button type="submit" color="primary">
                               Thêm
                             </Button>
                           </Col>
@@ -294,4 +294,3 @@ class Nhanvien extends Component {
 }
 
 export default Nhanvien;
-

@@ -17,25 +17,26 @@ class Main extends Component {
       departments: DEPARTMENTS,
       role: ROLE
     };
+    this.addStaff = this.addStaff.bind(this)
   }
 
   //-----Add Staffs-----
-  addStaff(newStaff) {
+  addStaff(newStaff, e) {
     let staffs1 = this.state.staffs;
     let newStaffs = staffs1.concat([{
       ...newStaff,
-      id: this.state.staffs.length,
-      image: '/assets/images/alberto.png',
-      department: this.props.departments.filter(x => x.id === newStaff.department)[0]
     }]);
+    console.log('data: ',this.state.staffs.length)
 
     this.setState({
       staffs: newStaffs
     });
+    // newStaff.preventDefault();
+    e.preventDefault();
+
   }
 
   render() {
-
     const StaffWithId = ({ match }) =>
       <StaffDetail
         staffs={this.state.staffs.filter((staff) =>
