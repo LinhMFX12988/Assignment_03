@@ -13,6 +13,7 @@ import {
   Label,
   FormGroup,
   Input,
+  FormFeedback
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -24,8 +25,13 @@ class Nhanvien extends Component {
 
     this.state = {
       staffs: this.props.staffs,
-      // em fix như thế nay thêm props bên ngoài thử đc k?
       isAddFormModalOpen: false,
+      message: "",
+      touched: {
+        name: false,
+        doB: false,
+        startDate: false,
+      }
     };
     this.input = React.createRef();
   }
@@ -58,24 +64,54 @@ class Nhanvien extends Component {
     });
   };
 
-  handelAddFormSubmit(event) {
+  handelAddFormSubmit = (event) => {
     let staff = {
       id: this.state.staffs.length + 1,
       name: this.state.name,
       doB: this.state.doB,
       salaryScale: this.state.salaryScale,
       startDate: this.state.startDate,
-      department: this.props.department.filter(x => x.id === staff.department)[0],
+      department: this.state.department,
       annualLeave: this.state.annualLeave,
       overTime: this.state.overTime,
       salary: this.state.salary,
       image: "/assets/images/alberto.png",
     };
-    console.log(staff);
-    this.setState({ staffs: [...this.state.staffs, staff] });
-    this.props.addStaff(staff, event)
 
+    this.props.addStaff(staff, event)
     event.preventDefault();
+  }
+
+  //-------------Validate form-----------------
+  handelBlur = (field) => (evt) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true }
+    });
+  }
+
+  validate(name, doB, startDate) {
+    const errors = {
+      name: '',
+      doB: '',
+      startDate: '',
+    };
+
+    if (this.state.touched.name && name.length < 2)
+      errors.name = 'First Name should be >= 3 characters';
+    else if (this.state.touched.name && name.length > 30)  
+      errors.name = 'First Name should be <= 10 characters';
+
+    if (this.state.touched.doB && doB.length < 3)
+      errors.doB = 'Last Name should be >= 3 characters';
+    else if (this.state.touched.doB && doB.length > 10)  
+      errors.doB = 'Last Name should be <= 10 characters';
+
+    if (this.state.touched.startDate && startDate.length < 3)
+      errors.startDate = 'Last Name should be >= 3 characters';
+    else if (this.state.touched.startDate && startDate.length > 10)  
+      errors.startDate = 'Last Name should be <= 10 characters';
+
+    return errors;  
   }
 
   render() {
@@ -118,7 +154,7 @@ class Nhanvien extends Component {
                   </ModalHeader>
                   <ModalBody>
                     <Form
-                      onSubmit={(values) => this.handelAddFormSubmit(values)}
+                      onSubmit={this.handelAddFormSubmit}
                     >
                       {/* Full name */}
                       <FormGroup>
@@ -131,9 +167,12 @@ class Nhanvien extends Component {
                               id="name"
                               name="name"
                               className="form-control"
+                              valid={errors.name === ''}
+                              invalid={errors.name !== ''}
                               value={this.state.name}
                               onChange={this.hendleChange}
                             />
+                            <FormFeedback>{errors.name}</FormFeedback>
                           </Col>
                         </Row>
                       </FormGroup>
@@ -185,6 +224,7 @@ class Nhanvien extends Component {
                               id="department"
                               name="department"
                               className="form-control"
+                              defaultValue="Sale"
                               value={this.state.department}
                               onChange={this.hendleChange}
                             >
@@ -207,8 +247,9 @@ class Nhanvien extends Component {
                             <Input
                               id="salaryScale"
                               name="salaryScale"
-                              placeHolder="1-3"
                               className="form-control"
+                              placeholder="1-3"
+                              defaultValue="1"
                               value={this.state.salaryScale}
                               onChange={this.hendleChange}
                             />
@@ -226,6 +267,8 @@ class Nhanvien extends Component {
                               id="annualLeave"
                               name="annualLeave"
                               className="form-control"
+                              placeholder="0"
+                              defaultValue="0"
                               value={this.state.annualLeave}
                               onChange={this.hendleChange}
                             />
@@ -243,6 +286,8 @@ class Nhanvien extends Component {
                               id="overTime"
                               name="overTime"
                               className="form-control"
+                              placeholder="0"
+                              defaultValue="0"
                               value={this.state.overTime}
                               onChange={this.hendleChange}
                             />

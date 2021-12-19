@@ -17,23 +17,19 @@ class Main extends Component {
       departments: DEPARTMENTS,
       role: ROLE
     };
-    this.addStaff = this.addStaff.bind(this)
   }
 
   //-----Add Staffs-----
-  addStaff(newStaff, e) {
+  addStaff = (newStaff) => {
     let staffs1 = this.state.staffs;
     let newStaffs = staffs1.concat([{
       ...newStaff,
+      department: this.state.departments.filter(x => x.id === newStaff.department)[0]
     }]);
-    console.log('data: ',this.state.staffs.length)
 
     this.setState({
       staffs: newStaffs
     });
-    // newStaff.preventDefault();
-    e.preventDefault();
-
   }
 
   render() {
