@@ -4,7 +4,7 @@ import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 
 function RenderStaff({ staffs }) {
-
+  console.log("staffs.department", staffs)
   return (
     <>
       <div className="row">
