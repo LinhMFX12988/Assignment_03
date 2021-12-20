@@ -95,6 +95,7 @@ class Nhanvien extends Component {
 
   //-------------Check validate----------------
   validate(name, doB, startDate) {
+
     const errors = {
       name: '',
       doB: '',
@@ -264,9 +265,9 @@ class Nhanvien extends Component {
                             <Input
                               id="salaryScale"
                               name="salaryScale"
+                              type="number.toFixed()"
                               className="form-control"
                               placeholder="1-3"
-                              defaultValue="1"
                               value={this.state.salaryScale}
                               onChange={this.hendleChange}
                             />
@@ -283,9 +284,9 @@ class Nhanvien extends Component {
                             <Input
                               id="annualLeave"
                               name="annualLeave"
+                              type="number"
                               className="form-control"
                               placeholder="0"
-                              defaultValue="0"
                               value={this.state.annualLeave}
                               onChange={this.hendleChange}
                             />
@@ -302,9 +303,9 @@ class Nhanvien extends Component {
                             <Input
                               id="overTime"
                               name="overTime"
+                              type="number"
                               className="form-control"
                               placeholder="0"
-                              defaultValue="0"
                               value={this.state.overTime}
                               onChange={this.hendleChange}
                             />
