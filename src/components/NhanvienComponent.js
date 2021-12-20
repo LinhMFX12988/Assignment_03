@@ -17,8 +17,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-///// Validators
-
 class Nhanvien extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +24,12 @@ class Nhanvien extends Component {
     this.state = {
       staffs: this.props.staffs,
       isAddFormModalOpen: false,
+      name: "",
+      doB: "",
+      startDate: "",
+      department: "",
+      annualLeave: "",
+      overTime: "",
       message: "",
       touched: {
         name: false,
@@ -89,32 +93,35 @@ class Nhanvien extends Component {
     });
   }
 
+  //-------------Check validate----------------
   validate(name, doB, startDate) {
     const errors = {
       name: '',
       doB: '',
       startDate: '',
+      department: '',
+      annualLeave: '',
+      overTime: '',
     };
 
-    if (this.state.touched.name && name.length < 2)
-      errors.name = 'First Name should be >= 3 characters';
+    if (this.state.touched.name && name.length === 0)
+      errors.name = 'Yêu cầu nhập !';
+    if (this.state.touched.name && name.length < 2 && name.length > 0)
+      errors.name = 'Yêu cầu nhập nhiều hơn 2 kí tự !';
     else if (this.state.touched.name && name.length > 30)  
-      errors.name = 'First Name should be <= 10 characters';
+      errors.name = 'Yêu cầu nhập ít hơn 30 kí tự !';
 
-    if (this.state.touched.doB && doB.length < 3)
-      errors.doB = 'Last Name should be >= 3 characters';
-    else if (this.state.touched.doB && doB.length > 10)  
-      errors.doB = 'Last Name should be <= 10 characters';
+    if (this.state.touched.doB && doB.length < 1)
+      errors.doB = 'Yêu cầu nhập !';
 
-    if (this.state.touched.startDate && startDate.length < 3)
-      errors.startDate = 'Last Name should be >= 3 characters';
-    else if (this.state.touched.startDate && startDate.length > 10)  
-      errors.startDate = 'Last Name should be <= 10 characters';
+    if (this.state.touched.startDate && startDate.length < 1)
+      errors.startDate = 'Yêu cầu nhập !';
 
     return errors;  
   }
 
   render() {
+    const errors = this.validate(this.state.name, this.state.doB, this.state.startDate);
     const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
         <Link to={`/nhanvien/${staff.id}`}>
@@ -164,11 +171,13 @@ class Nhanvien extends Component {
                           </Label>
                           <Col md={7}>
                             <Input
+                              type="text"
                               id="name"
                               name="name"
                               className="form-control"
-                              valid={errors.name === ''}
+                              // valid={errors.name === ''}
                               invalid={errors.name !== ''}
+                              onBlur={this.handelBlur('name')}
                               value={this.state.name}
                               onChange={this.hendleChange}
                             />
@@ -188,9 +197,13 @@ class Nhanvien extends Component {
                               id="doB"
                               name="doB"
                               className="form-control"
+                              // valid={errors.doB === ''}
+                              invalid={errors.doB !== ''}
+                              onBlur={this.handelBlur('doB')}
                               value={this.state.doB}
                               onChange={this.hendleChange}
                             />
+                            <FormFeedback>{errors.doB}</FormFeedback>
                           </Col>
                         </Row>
                       </FormGroup>
@@ -206,9 +219,13 @@ class Nhanvien extends Component {
                               id="startDate"
                               name="startDate"
                               className="form-control"
+                              // valid={errors.startDate === ''}
+                              invalid={errors.startDate !== ''}
+                              onBlur={this.handelBlur('startDate')}
                               value={this.state.startDate}
                               onChange={this.hendleChange}
                             />
+                            <FormFeedback>{errors.startDate}</FormFeedback>
                           </Col>
                         </Row>
                       </FormGroup>
@@ -298,7 +315,7 @@ class Nhanvien extends Component {
                       <FormGroup>
                         <Row className="form-group">
                           <Col className="col-7 offset-5">
-                            <Button type="submit" color="primary">
+                            <Button type="submit" color="primary" >
                               Thêm
                             </Button>
                           </Col>
