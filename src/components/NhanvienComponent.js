@@ -102,7 +102,7 @@ class Nhanvien extends Component {
                     >
                       <Row className="form-group">
                         <Label htmlFor="name" md={5}>
-                          Tên
+                          Tên *
                         </Label>
                         <Col md={7}>
                           <Control.text
@@ -121,9 +121,9 @@ class Nhanvien extends Component {
                             model=".name"
                             show="touched"
                             messages={{
-                              required: "Yêu cầu nhập",
-                              minLength: "Yêu cầu nhiều hơn 2 kí tự",
-                              maxLength: "Yêu cầu ít hơn 30 kí tự",
+                              required: "Yêu cầu nhập !",
+                              minLength: "Yêu cầu nhiều hơn 2 kí tự !",
+                              maxLength: "Yêu cầu ít hơn 30 kí tự !",
                             }}
                           />
                         </Col>
@@ -131,7 +131,7 @@ class Nhanvien extends Component {
 
                       <Row className="form-group">
                         <Label htmlFor="doB" md={5}>
-                          Ngày sinh
+                          Ngày sinh *
                         </Label>
                         <Col md={7}>
                           <Control.text
@@ -149,7 +149,7 @@ class Nhanvien extends Component {
                             model=".doB"
                             show="touched"
                             messages={{
-                              required: "Yêu cầu nhập",
+                              required: "Yêu cầu nhập !",
                             }}
                           />
                         </Col>
@@ -157,7 +157,7 @@ class Nhanvien extends Component {
 
                       <Row className="form-group">
                         <Label htmlFor="startDate" md={5}>
-                          Ngày vào công ty
+                          Ngày vào công ty *
                         </Label>
                         <Col md={7}>
                           <Control.text
@@ -175,7 +175,7 @@ class Nhanvien extends Component {
                             model=".startDate"
                             show="touched"
                             messages={{
-                              required: "Yêu cầu nhập",
+                              required: "Yêu cầu nhập !",
                             }}
                           />
                         </Col>
@@ -183,7 +183,7 @@ class Nhanvien extends Component {
 
                       <Row className="form-group">
                         <Label htmlFor="sale" md={5}>
-                          Phòng ban
+                          Phòng ban *
                         </Label>
                         <Col md={7}>
                           <Control.select
@@ -196,6 +196,7 @@ class Nhanvien extends Component {
                               required,
                             }}
                           >
+                            <option>Phòng Ban</option>
                             <option value="Dept01">Sale</option>
                             <option value="Dept02">HR</option>
                             <option value="Dept03">Marketing</option>
@@ -206,6 +207,9 @@ class Nhanvien extends Component {
                             className="text-danger"
                             model=".department"
                             show="touched"
+                            messages={{
+                              required: "Hãy chọn phòng ban !",
+                            }}
                           />
                         </Col>
                       </Row>

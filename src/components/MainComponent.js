@@ -32,7 +32,7 @@ class Main extends Component {
     let staffs1 = this.state.staffs;
     let newStaffs = staffs1.concat([{
       ...newStaff,
-      id: this.state.staffs.length,
+      id: this.state.staffs.length + 1,
       image: '/assets/images/alberto.png',
       department: this.props.departments.filter(x => x.id === newStaff.department)[0]
     }]);
