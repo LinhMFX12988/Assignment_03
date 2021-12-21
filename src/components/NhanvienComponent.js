@@ -120,10 +120,11 @@ class Nhanvien extends Component {
 
     return errors;
   }
-
+ 
+  //---------------Disable Button---------------
   canBeSubmitted() {
     const { name, doB, startDate, department } = this.state;
-    return name.length > 0 && doB.length > 0 && startDate.length > 0 && department.length > 0;
+    return name !== "" && doB !== "" && startDate !== "" && department !== "" && department !== "Dept00";
   }
 
   render() {
@@ -139,7 +140,7 @@ class Nhanvien extends Component {
     // } else {
     //   disable = false;
     // }
-
+    console.log("phong ban", this.state.department)
     const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
         <Link to={`/nhanvien/${staff.id}`}>
@@ -193,7 +194,7 @@ class Nhanvien extends Component {
                               id="name"
                               name="name"
                               className="form-control"
-                              valid={errors.name === ""}
+                              // valid={errors.name === ""}
                               invalid={errors.name !== ""}
                               onBlur={this.handelBlur("name")}
                               value={this.state.name}
@@ -215,7 +216,7 @@ class Nhanvien extends Component {
                               id="doB"
                               name="doB"
                               className="form-control"
-                              valid={errors.doB === ""}
+                              // valid={errors.doB === ""}
                               invalid={errors.doB !== ""}
                               onBlur={this.handelBlur("doB")}
                               value={this.state.doB}
@@ -237,7 +238,7 @@ class Nhanvien extends Component {
                               id="startDate"
                               name="startDate"
                               className="form-control"
-                              valid={errors.startDate === ""}
+                              // valid={errors.startDate === ""}
                               invalid={errors.startDate !== ""}
                               onBlur={this.handelBlur("startDate")}
                               value={this.state.startDate}
@@ -262,7 +263,7 @@ class Nhanvien extends Component {
                               value={this.state.department}
                               onChange={this.hendleChange}
                             >
-                              <option>Chọn phòng ban</option>
+                              <option value="Dept00">Chọn phòng ban</option>
                               <option value="Dept01">Sale</option>
                               <option value="Dept02">HR</option>
                               <option value="Dept03">Marketing</option>
