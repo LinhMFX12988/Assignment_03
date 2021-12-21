@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   Card,
   CardImg,
@@ -21,6 +21,7 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => !(val) || (val.length >= len);
 
 class Nhanvien extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -52,7 +53,7 @@ class Nhanvien extends Component {
   };
 
   render() {
-
+  
     const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
         <Link to={`/nhanvien/${staff.id}`}>
@@ -197,7 +198,7 @@ class Nhanvien extends Component {
                               required,
                             }}
                           >
-                            <option>Chọn phòng ban</option>
+                            <option ></option>
                             <option value="Dept01">Sale</option>
                             <option value="Dept02">HR</option>
                             <option value="Dept03">Marketing</option>
@@ -302,7 +303,7 @@ class Nhanvien extends Component {
                       {/*Add button*/}
                       <Row className="form-group">
                         <Col className="col-7 offset-5">
-                          <Button type="submit" color="primary">
+                          <Button type="submit" color="primary" >
                             Thêm
                           </Button>
                         </Col>
