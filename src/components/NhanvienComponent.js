@@ -27,35 +27,37 @@ class Nhanvien extends Component {
     this.state = {
       isAddFormModalOpen: false,
       search: '',
+      name: "",
+      doB: "",
+      startDate: "",
+      department: "",
     };
     this.input = React.createRef();
-    this.toggleAddFormModal = this.toggleAddFormModal.bind(this);
-    this.handelAddFormSubmit = this.handelAddFormSubmit.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
   }
 
   //--------------Add Staffs-----------------
-  handelAddFormSubmit(values) {
+  handelAddFormSubmit = (values) => {
     this.props.addStaff(values)
   }
 
-  toggleAddFormModal() {
+  toggleAddFormModal = () => {
     this.setState({
       isAddFormModalOpen: !this.state.isAddFormModalOpen,
     });
   }
 
   //---------------Search--------------------
-  handleSearch(e) {
+  handleSearch = (e) => {
     this.setState({ search: e.target.value });
   };
 
   render() {
+
     const RenderNVItem = ({ staff }) => (
       <Card style={{ border: "1px solid rgb(112, 112, 112)" }}>
         <Link to={`/nhanvien/${staff.id}`}>
           <CardImg width="100%" src={staff.image} />
-          <CardTitle className="text-center" style={{ color: "black" }}>
+          <CardTitle className="text-center" style={{ color: "black", fontSize: "90%" }}>
             {" "}
             {staff.name}
           </CardTitle>
@@ -189,14 +191,13 @@ class Nhanvien extends Component {
                           <Control.select
                             model=".department"
                             className="form-control"
-                            defaultValue="Sale"
                             name="sale"
                             id="sale"                          
                             validators={{
                               required,
                             }}
                           >
-                            <option>Phòng Ban</option>
+                            <option>Chọn phòng ban</option>
                             <option value="Dept01">Sale</option>
                             <option value="Dept02">HR</option>
                             <option value="Dept03">Marketing</option>
@@ -300,7 +301,7 @@ class Nhanvien extends Component {
 
                       {/*Add button*/}
                       <Row className="form-group">
-                        <Col>
+                        <Col className="col-7 offset-5">
                           <Button type="submit" color="primary">
                             Thêm
                           </Button>
