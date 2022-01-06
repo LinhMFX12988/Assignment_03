@@ -27,7 +27,7 @@ function Department(props) {
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem>
-                        <Link to="/staffs">Nhân Viên</Link>
+                        <Link to="/">Nhân Viên</Link>
                     </BreadcrumbItem>
                     <BreadcrumbItem active>Phòng Ban</BreadcrumbItem>
                 </Breadcrumb>

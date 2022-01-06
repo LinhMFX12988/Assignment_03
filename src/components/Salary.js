@@ -67,7 +67,7 @@ function Salary(props) {
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem>
-                        <Link to="/staffs">Nhân Viên</Link>
+                        <Link to="/">Nhân Viên</Link>
                     </BreadcrumbItem>
                     <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
                 </Breadcrumb>
