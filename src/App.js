@@ -8,6 +8,14 @@ import Footer from "./components/Footer";
 import "./App.css";
 import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 import { Switch, Route, Redirect } from 'react-router-dom';
+// import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return {
+    staffs: state.staffs,
+    departments: state.departments
+  }
+}
 
 function App() {
   const [staff, setStaff] = useState(STAFFS);

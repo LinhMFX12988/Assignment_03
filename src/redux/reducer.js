@@ -1,11 +1,10 @@
-import { STAFFS, DEPARTMENTS, ROLE } from "./shared/staffs";
+// import { STAFFS, DEPARTMENTS } from "./shared/staffs";
 
-export const initialState = {
-    staffs: STAFFS,
-    departments: DEPARTMENTS,
-    role: ROLE
-};
+// export const initialState = {
+//     staffs: STAFFS,
+//     departments: DEPARTMENTS
+// };
 
-export const Reducer = (state = initialState, action) => {
-    return state;
-};
+// export const Reducer = (state = initialState, action) => {
+//     return state;
+// };
