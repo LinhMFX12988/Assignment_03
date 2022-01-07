@@ -9,18 +9,20 @@ import "./App.css";
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
   return {
     staffs: state.staffs,
     departments: state.departments
-  }
+  };
 }
-console.log('test', mapStateToProps)
-function App() {
-  const [staff, setStaff] = useState(staffs);
+
+function App({staffs, departments}) {
+  console.log('staff: ', staffs)
+
+  const [staff, setStaff] = useState(staffs)
   const [department] = useState(departments);
 
-  //-------------------Add Staff--------------------
+  // -------------------Add Staff--------------------
   const addStaff = (newStaff) => {
     let newStaffs = staff.concat([{
       ...newStaff,
@@ -35,7 +37,7 @@ function App() {
   //--------------Render detail staff----------------
   const renderDetailStaff = ({ match }) =>
     <StaffDetail
-      staffs={staff.filter((staffs) =>
+      staffs={staffs.filter((staffs) =>
         staffs.id === parseInt(match.params.id, 10))[0]}
     />
 
@@ -43,10 +45,10 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route exact path="/staffs" component={() => <StaffList staffs={staff} addStaff={addStaff} />} />
+        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} addStaff={addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
-        <Route path="/department" component={() => <Department departments={department} />} />
-        <Route path="/salary" component={() => <Salary salary={staff} />} />
+        <Route path="/department" component={() => <Department departments={departments} />} />
+        <Route path="/salary" component={() => <Salary salary={staffs} />} />
         <Redirect to="/staffs" />
       </Switch>
       <Footer />
@@ -55,3 +57,5 @@ function App() {
 }
 
 export default withRouter(connect(mapStateToProps)(App));
+// export default App;
+

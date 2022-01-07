@@ -1,4 +1,4 @@
-import { STAFFS, DEPARTMENTS } from "./shared/staffs";
+import { STAFFS, DEPARTMENTS } from "../shared/staffs";
 
 export const initialState = {
     staffs: STAFFS,
