@@ -7,17 +7,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-// import { Provider } from "react-redux";
 import { ConfigureStore } from "./redux/configureStore";
+import { Provider } from "react-redux";
 
-// const store = ConfigureStore();
+const store = ConfigureStore();
 
 ReactDOM.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
-    </BrowserRouter>,
-  //  </Provider>, 
+    </BrowserRouter>
+  </Provider>, 
   document.getElementById("root")
 );
 

@@ -6,9 +6,8 @@ import Department from "./components/Department";
 import Salary from "./components/Salary";
 import Footer from "./components/Footer";
 import "./App.css";
-import { STAFFS, DEPARTMENTS } from "./shared/staffs";
-import { Switch, Route, Redirect } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
@@ -16,10 +15,10 @@ const mapStateToProps = state => {
     departments: state.departments
   }
 }
-
+console.log('test', mapStateToProps)
 function App() {
-  const [staff, setStaff] = useState(STAFFS);
-  const [department] = useState(DEPARTMENTS);
+  const [staff, setStaff] = useState(staffs);
+  const [department] = useState(departments);
 
   //-------------------Add Staff--------------------
   const addStaff = (newStaff) => {
@@ -55,4 +54,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(connect(mapStateToProps)(App));
