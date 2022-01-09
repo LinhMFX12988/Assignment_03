@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
-import StaffList from "./components/StaffList";
-import StaffDetail from "./components/StaffDetail";
-import Department from "./components/Department";
+import StaffList from "./components/STAFFS/StaffList";
+import StaffDetail from "./components/STAFFS/StaffDetail";
+import Department from "./components/DEPARTMENTS/Department";
 import Salary from "./components/Salary";
 import Footer from "./components/Footer";
 import "./App.css";
@@ -17,20 +17,19 @@ function mapStateToProps(state) {
 }
 
 function App({staffs, departments}) {
-  console.log('staff: ', staffs)
 
   const [staff, setStaff] = useState(staffs)
   const [department] = useState(departments);
 
-  // -------------------Add Staff--------------------
+  // // -------------------Add Staff--------------------
   const addStaff = (newStaff) => {
     let newStaffs = staff.concat([{
       ...newStaff,
-      id: staff.length + 1,
+      id: staff.length,
       image: '/assets/images/alberto.jpg',
       department: department.filter(x => x.id === newStaff.department)[0]
     }]);
-
+    console.log(newStaffs)
     setStaff(newStaffs);
   }
 
@@ -57,5 +56,5 @@ function App({staffs, departments}) {
 }
 
 export default withRouter(connect(mapStateToProps)(App));
-// export default App;
+
 
