@@ -10,7 +10,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addStaff } from './redux/ActionCreators';
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     staffs: state.staffs
   };
