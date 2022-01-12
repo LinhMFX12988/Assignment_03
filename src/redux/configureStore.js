@@ -9,6 +9,5 @@ export const ConfigureStore = () => {
             departments: Departments
         })
     );
-
     return store;
 }
