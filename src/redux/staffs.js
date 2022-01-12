@@ -9,7 +9,7 @@ export const Staffs = (state = STAFFS, action) => {
             staff.id = state.length;
             staff.image = '.../public/assets/images/alberto.jpg';
             staff.department = DEPARTMENTS.filter(x => x.id === action.payload.department)[0]
-            return state.concat([...staff])            
+            return state.concat([...staff])
         default:
             return state;
     }

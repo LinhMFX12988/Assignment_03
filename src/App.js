@@ -17,8 +17,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addStaff: (id, name, doB, startDate, department, salaryScale, annualLeave, overTime) => 
-  dispatch(addStaff(id, name, doB, startDate, department, salaryScale, annualLeave, overTime))
+  addStaff: (name, doB, startDate, department, salaryScale, annualLeave, overTime) => 
+  dispatch(addStaff(name, doB, startDate, department, salaryScale, annualLeave, overTime))
 });
 
 function App({staffs, departments}) {

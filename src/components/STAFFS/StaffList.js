@@ -21,7 +21,7 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => !(val) || (val.length >= len);
 
 function StaffList(props) {
-  // console.log('props:', props)
+  console.log('props:', props)
   const [search, setSearch] = useState("");
   const [toggleStaffs, setToggleStaffs] = useState(false);
 
@@ -36,10 +36,16 @@ function StaffList(props) {
   //-----------------End Search---------------------
   //-----------------Add Staff----------------------
   const handelAddFormSubmit = (values) => {
-    console.log('newStaff:', props.addStaff(props.id, values.name, values.doB, values.startDate, values.department, values.salaryScale, values.annualLeave, values.overTime))
+    console.log('newStaff:', props.addStaff(
+      values.name, 
+      values.doB, 
+      values.startDate, 
+      values.department, 
+      values.salaryScale, 
+      values.annualLeave, 
+      values.overTime))
     toggleAddFormModal();
     props.addStaff(
-      props.id, 
       values.name, 
       values.doB, 
       values.startDate, 
