@@ -1,11 +1,15 @@
 import * as ActionTypes from './ActionTypes';
 
-export const addStaff = (state = {staffs: []}, action) => {
-    switch (action.type) {
-        case ActionTypes.ADD_STAFF:
-            return {...state, staffs: action.payload};
-        default:
-            return state;
-
-    }
-}
+export const addStaff = (id, name, doB, startDate, department, salaryScale, annualLeave, overTime) => ({   
+            type: ActionTypes.ADD_STAFF,
+            payload: {
+                id: id,
+                name: name,
+                doB: doB,
+                startDate: startDate,
+                department: department,
+                salaryScale: salaryScale,
+                annualLeave: annualLeave,
+                overTime: overTime
+            }
+})

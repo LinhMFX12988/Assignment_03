@@ -12,10 +12,12 @@ function StaffDetail(props) {
                     <BreadcrumbItem><Link to="/nhanvien">Nhân Viên</Link></BreadcrumbItem>
                     <BreadcrumbItem active>{props.staffs.name}</BreadcrumbItem>
                 </Breadcrumb>
+                <div className="col-12">
+                    <h3>{props.staffs.name}</h3>
+                    <hr />
+                </div>
             </div>
-            <hr />
             <div className="row">
-                {/* <RenderStaff staffs={props.staffs} /> */}
                 <div className="col-12 col-md-4 col-lg-3">
                     <CardImg width="100%" src={props.staffs.image} />
                 </div>

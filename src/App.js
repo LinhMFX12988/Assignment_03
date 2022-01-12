@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./components/Header";
 import StaffList from "./components/STAFFS/StaffList";
 import StaffDetail from "./components/STAFFS/StaffDetail";
@@ -12,13 +12,13 @@ import { addStaff } from './redux/ActionCreators';
 
 function mapStateToProps(state) {
   return {
-    staffs: state.staffs,
-    departments: state.departments
+    staffs: state.staffs
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addStaff: (staffs) => dispatch(staffs)
+  addStaff: (id, name, doB, startDate, department, salaryScale, annualLeave, overTime) => 
+  dispatch(addStaff(id, name, doB, startDate, department, salaryScale, annualLeave, overTime))
 });
 
 function App({staffs, departments}) {
@@ -43,13 +43,14 @@ function App({staffs, departments}) {
     <StaffDetail
       staffs={staffs.filter((staffs) =>
         staffs.id === parseInt(match.params.id, 10))[0]}
+        addStaff={addStaff}
     />
 
   return (
     <>
       <Header />
       <Switch>
-        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} />} />
+        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} addStaff={addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
         <Route path="/department" component={() => <Department departments={departments} />} />
         <Route path="/salary" component={() => <Salary salary={staffs} />} />

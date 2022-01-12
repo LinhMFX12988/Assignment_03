@@ -21,8 +21,9 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => !(val) || (val.length >= len);
 
 function StaffList(props) {
+  console.log('props:', props)
   const [search, setSearch] = useState("");
-  const [addStaff, setAddStaff] = useState(false);
+  const [toggleStaffs, setToggleStaffs] = useState(false);
 
   //-----------------Search---------------------
   const handleSearch = (e) => {
@@ -34,12 +35,14 @@ function StaffList(props) {
   });
   //-----------------End Search---------------------
   //-----------------Add Staff----------------------
-  const handelAddFormSubmit = (value) => {
-    props.addStaff(value);
+  const handelAddFormSubmit = (values) => {
+    console.log('newStaff:', props.addStaff(props.id, values.name, values.doB, values.startDate, values.department, values.salaryScale, values.annualLeave, values.overTime))
+    toggleAddFormModal();
+    props.addStaff(props.id, values.name, values.doB, values.startDate, values.department, values.salaryScale, values.annualLeave, values.overTime);
   };
 
   const toggleAddFormModal = () => {
-    setAddStaff(!addStaff);
+    setToggleStaffs(!toggleStaffs);
   };
 
   const closeBtn = (
@@ -81,7 +84,7 @@ function StaffList(props) {
               </Button>
 
               {/*Add Form Modal*/}
-              <Modal isOpen={addStaff} toggle={toggleAddFormModal}>
+              <Modal isOpen={toggleStaffs} toggle={toggleAddFormModal}>
                 <ModalHeader toggle={toggleAddFormModal} close={closeBtn}>
                   Thêm Nhân Viên
                 </ModalHeader>
