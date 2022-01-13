@@ -36,7 +36,6 @@ function StaffList(props) {
   //-----------------End Search---------------------
   //-----------------Add Staff----------------------
   const handelAddFormSubmit = (values) => {
-    toggleAddFormModal();
     props.addStaff(
       values.name, 
       values.doB, 
@@ -44,8 +43,8 @@ function StaffList(props) {
       values.department, 
       values.salaryScale, 
       values.annualLeave, 
-      values.overTime);
-  };
+      values.overTime
+    )};
  
   const toggleAddFormModal = () => {
     setToggleStaffs(!toggleStaffs);

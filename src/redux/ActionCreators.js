@@ -11,4 +11,4 @@ export const addStaff = (name, doB, startDate, department, salaryScale, annualLe
                 annualLeave: annualLeave,
                 overTime: overTime
             }
-})
+});

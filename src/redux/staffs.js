@@ -3,7 +3,6 @@ import { DEPARTMENTS } from "../shared/staffs";
 import * as ActionTypes from './ActionTypes';
 
 export const Staffs = (state = STAFFS, action) => {
-    console.log('NEWSTAFF: ' +  JSON.stringify(action));
     switch(action.type) {
         case ActionTypes.ADD_STAFF:
             var staff = action.payload; 

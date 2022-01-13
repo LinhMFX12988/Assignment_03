@@ -12,17 +12,18 @@ import { addStaff } from './redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
-    staffs: state.staffs
+    staffs: state.staffs,
+    departments: state.departments
   };
 }
 
 const mapDispatchToProps = {
-  addStaff: (name, doB, startDate, department, salaryScale, annualLeave, overTime) => 
-  addStaff(name, doB, startDate, department, salaryScale, annualLeave, overTime)
+  addStaff: (name, doB, startDate, department, salaryScale, annualLeave, overTime) =>
+    addStaff(name, doB, startDate, department, salaryScale, annualLeave, overTime)
 };
 
 function App(props) {
-  
+
   //--------------Render detail staff----------------
   const renderDetailStaff = ({ match }) =>
     <StaffDetail
@@ -37,7 +38,7 @@ function App(props) {
       <Switch>
         <Route exact path="/staffs" component={() => <StaffList staffs={props.staffs} addStaff={props.addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
-        <Route path="/department" component={() => <Department departments={props.departments} />} />
+        <Route path="/department" component={() => <Department departments={props.departments} addStaff={props.addStaff}/>} />
         <Route path="/salary" component={() => <Salary salary={props.staffs} />} />
         <Redirect to="/staffs" />
       </Switch>
