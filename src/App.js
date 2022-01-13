@@ -16,44 +16,29 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = {
   addStaff: (name, doB, startDate, department, salaryScale, annualLeave, overTime) => 
-  dispatch(addStaff(name, doB, startDate, department, salaryScale, annualLeave, overTime))
-});
+  addStaff(name, doB, startDate, department, salaryScale, annualLeave, overTime)
+};
 
-function App({staffs, departments}) {
-
-  // const [staff, setStaff] = useState(staffs)
-  // const [department] = useState(departments);
-
-  // // -------------------Add Staff--------------------
-  // const addStaff = (newStaff) => {
-  //   let newStaffs = staff.concat([{
-  //     ...newStaff,
-  //     id: staff.length,
-  //     image: '/assets/images/alberto.jpg',
-  //     department: department.filter(x => x.id === newStaff.department)[0]
-  //   }]);
-  //   console.log(newStaffs)
-  //   setStaff(newStaffs);
-  // }
-
+function App(props) {
+  
   //--------------Render detail staff----------------
   const renderDetailStaff = ({ match }) =>
     <StaffDetail
-      staffs={staffs.filter((staffs) =>
+      staffs={props.staffs.filter((staffs) =>
         staffs.id === parseInt(match.params.id, 10))[0]}
-        addStaff={addStaff}
+        addStaff={props.addStaff}
     />
 
   return (
     <>
       <Header />
       <Switch>
-        <Route exact path="/staffs" component={() => <StaffList staffs={staffs} addStaff={addStaff}/>} />
+        <Route exact path="/staffs" component={() => <StaffList staffs={props.staffs} addStaff={props.addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
-        <Route path="/department" component={() => <Department departments={departments} />} />
-        <Route path="/salary" component={() => <Salary salary={staffs} />} />
+        <Route path="/department" component={() => <Department departments={props.departments} />} />
+        <Route path="/salary" component={() => <Salary salary={props.staffs} />} />
         <Redirect to="/staffs" />
       </Switch>
       <Footer />
