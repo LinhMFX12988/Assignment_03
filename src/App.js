@@ -38,7 +38,7 @@ function App(props) {
       <Switch>
         <Route exact path="/staffs" component={() => <StaffList staffs={props.staffs} addStaff={props.addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
-        <Route path="/department" component={() => <Department departments={props.departments} />} />
+        <Route path="/department" component={() => <Department departments={props.departments} addStaff={props.addStaff}/>} />
         <Route path="/salary" component={() => <Salary salary={props.staffs} />} />
         <Redirect to="/staffs" />
       </Switch>
