@@ -2,13 +2,11 @@ import { DEPARTMENTS } from "../shared/staffs";
 import * as ActionTypes from "./ActionTypes";
 
 export const Departments = (state = DEPARTMENTS, action) => {
-  switch (action.type) {
-    case ActionTypes.ADD_STAFF:
-      var department = action.payload;
-      if (department.id === action.payload.department.id) {
-        department.numberOfStaff += 1;
-      }
-      return state.forEach(department);
+  console.log('DEPARTMENTS:', state)
+  switch (action.type1) {
+    case ActionTypes.UPDATE_DEPARTMENT:
+      
+      return state.department.numberOfStaff += 1;
     default:
       return state;
   }

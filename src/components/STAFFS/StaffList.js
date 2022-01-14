@@ -36,6 +36,7 @@ function StaffList(props) {
   //-----------------End Search---------------------
   //-----------------Add Staff----------------------
   const handelAddFormSubmit = (values) => {
+    console.log(values)
     props.addStaff(
       values.name, 
       values.doB, 

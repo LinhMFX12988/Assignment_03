@@ -1,1 +1,2 @@
 export const ADD_STAFF = 'ADD_STAFF';
+export const UPDATE_DEPARTMENT = 'UPDATE_DEPARTMENT';
