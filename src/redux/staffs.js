@@ -8,7 +8,7 @@ export const Staffs = (state = STAFFS, action) => {
             var staff = action.payload; 
             staff.id = state.length;
             staff.image = '/assets/images/alberto.jpg';
-            staff.department = DEPARTMENTS.filter(x => x.id === action.payload.department)[0]
+            staff.department = DEPARTMENTS.filter(x => x.id === staff.department)[0]
             return state.concat(staff);
         default:
             return state;
