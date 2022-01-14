@@ -9,10 +9,11 @@ export const Departments = (state = DEPARTMENTS, action) => {
       const departmentIndex = (index) => {
         return index.id === staff.department.id;
       };
-
-        console.log("index:", state.findIndex(departmentIndex));
-      return state[state.findIndex(departmentIndex)].numberOfStaff += 1;
+        staff.numberOfStaff = state[state.findIndex(departmentIndex)].numberOfStaff += 1;
+        console.log("index:", state[state.findIndex(departmentIndex)]);
+      return state;
     default:
       return state;
   }
 };
+// data.map(el => (el.id === id ? {...el, text} : el))

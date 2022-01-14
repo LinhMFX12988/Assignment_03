@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { addStaff } from './redux/ActionCreators';
 
 const mapStateToProps = state => {
+  console.log('update dps:', state.departments)
   return {
     staffs: state.staffs,
     departments: state.departments
@@ -38,7 +39,7 @@ function App(props) {
       <Switch>
         <Route exact path="/staffs" component={() => <StaffList staffs={props.staffs} addStaff={props.addStaff}/>} />
         <Route path="/staffs/:id" component={renderDetailStaff} />
-        <Route path="/department" component={() => <Department departments={props.departments} addStaff={props.addStaff}/>} />
+        <Route path="/department" component={() => <Department departments={props.departments} />} />
         <Route path="/salary" component={() => <Salary salary={props.staffs} />} />
         <Redirect to="/staffs" />
       </Switch>
