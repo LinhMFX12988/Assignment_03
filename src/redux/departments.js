@@ -6,14 +6,8 @@ export const Departments = (state = DEPARTMENTS, action) => {
   switch (action.type1) {
     case ActionTypes.UPDATE_DEPARTMENT:
       var staff = action.payload;
-      const departmentIndex = (index) => {
-        return index.id === staff.department.id;
-      };
-        staff.numberOfStaff = state[state.findIndex(departmentIndex)].numberOfStaff += 1;
-        console.log("index:", state[state.findIndex(departmentIndex)]);
-      return state;
+      return state.map(el => (el.id === staff.department.id ? {...el, numberOfStaff: (el.numberOfStaff+1)} : el));
     default:
       return state;
   }
 };
-// data.map(el => (el.id === id ? {...el, text} : el))

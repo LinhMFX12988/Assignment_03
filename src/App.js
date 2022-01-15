@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { addStaff } from './redux/ActionCreators';
 
 const mapStateToProps = state => {
-  console.log('update dps:', state.departments)
+  // console.log('update dps:', state.departments)
   return {
     staffs: state.staffs,
     departments: state.departments

@@ -3,7 +3,7 @@ import { Card, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function Department(props) {
-    console.log('dps:', props.departments)
+
     const renderDepartment = props.departments.map((department) => {
         return (
             <div key={department.id} className="col-12 col-md-6 col-xl-4">
